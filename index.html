@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineers Vlogs</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" sizes="any" href="assets/images/white bg (1).svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/white bg (1).png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/white bg (1).png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/white bg (1).png">
+    <link rel="manifest" href="assets/manifest.json">
+    <!-- External Libraries for Services -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Independent Logo (Only visible in hero section) -->
+    <div class="independent-logo">
+        <img src="assets/images/white bg (1).svg" alt="Engineers Vlog Logo">
+    </div>
+
+    <!-- Header -->
+    <header>
+        <!-- Header Logo (appears after scrolling past hero) -->
+        <a href="#home" class="header-logo">
+            <img src="assets/images/white bg (1).svg" alt="Engineers Vlog">
+        </a>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav>
+            <div class="nav-center" id="navMenu">
+                <ul>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="assets/Extra HTMLs/about us.html">ABOUT US</a></li>
+                    <li><a href="#programs">SERVICES</a></li>
+                    <li><a href="#events">OUR PARTNERS</a></li>
+                    <li><a href="#testimonials">BLOGS</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#testimonials" class="dropdown-toggle">
+                            ORBIT ENGINEERING EXPO
+                            <i class="dropdown-arrow">▼</i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="assets/Extra HTMLs/expo1.0.html">Orbit Engineering Expo 1.0</a></li>
+                            <li><a href="assets/Extra HTMLs/expo2.0.html">Orbit Engineering Expo 2.0</a></li>
+                        </ul>
+                    </li>
+                    <!-- New mobile contact menu item -->
+                    <li class="mobile-contact">
+                        <a href="#contact">CONTACT US</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <a href="#contact" class="book-now-btn">Contact Us</a>
+    </header>
+
+    <!-- Hero Slider -->
+    <div class="hero-slider" id="home">
+        <div class="slide active">
+            <div class="slide-background-placeholder">
+                <img src="Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/image.png" alt="Slide 1" class="slide-background">
+            </div>
+            <div class="slide-content">
+                <h1>LEARNING BEING WITH US</h1>
+                <p>We, at Engineers Vlogs offer supportive and inspirational environments for young enquiring minds to learn and grow with us.</p>
+                <a href="#learn-more" class="read-more-btn">READ MORE</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-background-placeholder">
+                <img src="Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/IMG_7632.jpg" alt="Slide 2" class="slide-background">
+            </div>
+            <div class="slide-content">
+                <h1>2 Million Students Impacted</h1>
+                <p>Transforming education across Nepal through innovative hands-on learning experiences and STEAM education programs.</p>
+                <a href="#impact" class="read-more-btn">READ MORE</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-background-placeholder">
+                <img src="drive-download-20251107T050826Z-1-001/image (2).png" alt="Slide 3" class="slide-background">
+            </div>
+            <div class="slide-content">
+                <h1>STEAM Education Excellence</h1>
+                <p>Empowering the next generation through Science, Technology, Engineering, Arts & Mathematics education.</p>
+                <a href="#steam" class="read-more-btn">READ MORE</a>
+            </div>
+        </div>
+
+        <!-- Slider Navigation Arrows -->
+        <div class="slider-arrows">
+            <div class="slider-arrow" onclick="changeSlide(currentSlide - 1)">‹</div>
+            <div class="slider-arrow" onclick="changeSlide(currentSlide + 1)">›</div>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="slider-nav">
+            <div class="slider-dot active" onclick="changeSlide(0)"></div>
+            <div class="slider-dot" onclick="changeSlide(1)"></div>
+            <div class="slider-dot" onclick="changeSlide(2)"></div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/info.engineersvlogs/" class="social-link"><img src="logo/instagram icon.png" alt="Instagram"></a>
+            <a href="https://www.facebook.com/share/1AKZDQPkjb/" class="social-link"><img src="logo/faceboook icon.png" alt="Facebook"></a>
+            <a href="https://x.com/engineersvlogs" class="social-link"><img src="logo/x logo.png" alt="Twitter"></a>
+            <a href="https://np.linkedin.com/company/engineersvlogs" class="social-link"><img src="logo/linkdeln icon.png" alt="LinkedIn"></a>
+            <a href="https://www.youtube.com/@EngineersVlogs" class="social-link"><img src="logo/youtube icon.png" alt="YouTube"></a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-background">
+            <img src="assets/images/about us.jpg" alt="About Us Background" class="about-bg-image">
+            <div class="about-gradient-overlay"></div>
+        </div>
+        
+        <!-- Stats Counter (full width at top) -->
+        <div class="about-stats-container">
+            <div class="stat-item">
+                <h2>59K+</h2>
+                <p>Followers in Facebook</p>
+            </div>
+            <div class="stat-item">
+                <h2>2.5M+</h2>
+                <p>Monthly Reach</p>
+            </div>
+            <div class="stat-item">
+                <h2>255+</h2>
+                <p>Activities</p>
+            </div>
+            <div class="stat-item">
+                <h2>115+</h2>
+                <p>Active Members</p>
+            </div>
+        </div>
+
+        <div class="about-content-wrapper">
+            <!-- Main Content -->
+            <div class="about-main-content">
+                <h2 class="about-main-heading">What We Do</h2>
+                <p class="about-description">Engineers Vlogs is a community of passionate engineers dedicated to making learning practical and inspiring. With the motto "Let's Bring Engineering out of the Textbooks," we focus on hands-on technical learning, skill development, and real-world applications. Our goal is to support aspiring engineers through workshops, training, study materials, and project resources, helping them grow into confident, creative, and future-ready professionals.</p>
+                
+                <div class="about-sub-sections">
+                    <div class="about-sub-section">
+                        <h3>MISSION STATEMENT</h3>
+                        <p>Our mission at Engineers Vlogs is to develop the unique abilities and potential of each student by offering an enriched educational program.</p>
+                    </div>
+                    <div class="about-sub-section">
+                        <h3>OUR CORE VALUES</h3>
+                        <p>We have a culture that is modern, relevant, and inspires students to have a brighter future and we follow a child-centered educational approach.</p>
+                    </div>
+                </div>
+
+                <!-- Meet Our Team Button (inside content for mobile flow) -->
+                <a href="assets/Extra HTMLs/about us.html#team" class="meet-team-btn meet-team-btn-mobile">Meet Our Team</a>
+            </div>
+        </div>
+
+        <!-- Meet Our Team Button (absolute positioned at bottom-right for desktop) -->
+        <a href="assets/Extra HTMLs/about us.html#team" class="meet-team-btn meet-team-btn-desktop">Meet Our Team</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="programs" class="services-section">
+        <div class="services-background"></div>
+        <div class="services-gradient-overlay"></div>
+        
+        <div class="services-content-wrapper">
+            <div class="services-title-container">
+                <h2 class="services-title">Our <span class="highlight">Services</span></h2>
+            </div>
+
+            <!-- Services Carousel Container -->
+            <div class="services-carousel-container">
+                <div class="services-swiper swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Service Card 1 -->
+                        <div class="swiper-slide">
+                            <a href="#robotics" class="service-card">
+                                <div class="blob"></div>
+                                <div class="service-card-content">
+                                    <div class="service-number">
+                                        <h1>01</h1>
+                                        <h3 class="service-tag">Training</h3>
+                                    </div>
+                                    <div class="service-data">
+                                        <div class="service-content-top">
+                                            <h2 class="service-title">Robotics Training</h2>
+                                            <div class="service-image-container">
+                                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robotics Training" class="service-image">
+                                            </div>
+                                            <p class="service-description">
+                                                Master the fundamentals of robotics through hands-on projects and real-world applications.
+                                            </p>
+                                        </div>
+                                        <span class="learn-more-btn">
+                                            Learn More <i class="ri-arrow-right-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Service Card 2 -->
+                        <div class="swiper-slide">
+                            <a href="#steam" class="service-card">
+                                <div class="blob"></div>
+                                <div class="service-card-content">
+                                    <div class="service-number">
+                                        <h1>02</h1>
+                                        <h3 class="service-tag">Education</h3>
+                                    </div>
+                                    <div class="service-data">
+                                        <div class="service-content-top">
+                                            <h2 class="service-title">STEAM Training</h2>
+                                            <div class="service-image-container">
+                                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="STEAM Training" class="service-image">
+                                            </div>
+                                            <p class="service-description">
+                                                Comprehensive STEAM education programs integrating science, technology, engineering, arts, and mathematics.
+                                            </p>
+                                        </div>
+                                        <span class="learn-more-btn">
+                                            Learn More <i class="ri-arrow-right-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Service Card 3 -->
+                        <div class="swiper-slide">
+                            <a href="#media" class="service-card">
+                                <div class="blob"></div>
+                                <div class="service-card-content">
+                                    <div class="service-number">
+                                        <h1>03</h1>
+                                        <h3 class="service-tag">Media</h3>
+                                    </div>
+                                    <div class="service-data">
+                                        <div class="service-content-top">
+                                            <h2 class="service-title">Engineering Media</h2>
+                                            <div class="service-image-container">
+                                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80" alt="Engineering Media" class="service-image">
+                                            </div>
+                                            <p class="service-description">
+                                                Professional media production and content creation services for engineering projects and educational materials.
+                                            </p>
+                                        </div>
+                                        <span class="learn-more-btn">
+                                            Learn More <i class="ri-arrow-right-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Service Card 4 -->
+                        <div class="swiper-slide">
+                            <a href="#software" class="service-card">
+                                <div class="blob"></div>
+                                <div class="service-card-content">
+                                    <div class="service-number">
+                                        <h1>04</h1>
+                                        <h3 class="service-tag">Software</h3>
+                                    </div>
+                                    <div class="service-data">
+                                        <div class="service-content-top">
+                                            <h2 class="service-title">Computer Engineering Software Training</h2>
+                                            <div class="service-image-container">
+                                                <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=800&q=80" alt="Software Training" class="service-image">
+                                            </div>
+                                            <p class="service-description">
+                                                Advanced software development training covering modern programming languages and frameworks.
+                                            </p>
+                                        </div>
+                                        <span class="learn-more-btn">
+                                            Learn More <i class="ri-arrow-right-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Service Card 5 -->
+                        <div class="swiper-slide">
+                            <a href="#civil" class="service-card">
+                                <div class="blob"></div>
+                                <div class="service-card-content">
+                                    <div class="service-number">
+                                        <h1>05</h1>
+                                        <h3 class="service-tag">Civil</h3>
+                                    </div>
+                                    <div class="service-data">
+                                        <div class="service-content-top">
+                                            <h2 class="service-title">Civil Engineering Training</h2>
+                                            <div class="service-image-container">
+                                                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Civil Engineering" class="service-image">
+                                            </div>
+                                            <p class="service-description">
+                                                Comprehensive civil engineering courses covering structural design, construction management, and more.
+                                            </p>
+                                        </div>
+                                        <span class="learn-more-btn">
+                                            Learn More <i class="ri-arrow-right-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Service Card 6 -->
+                        <div class="swiper-slide">
+                            <a href="#marketing" class="service-card">
+                                <div class="blob"></div>
+                                <div class="service-card-content">
+                                    <div class="service-number">
+                                        <h1>06</h1>
+                                        <h3 class="service-tag">Marketing</h3>
+                                    </div>
+                                    <div class="service-data">
+                                        <div class="service-content-top">
+                                            <h2 class="service-title">Digital Marketing</h2>
+                                            <div class="service-image-container">
+                                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Digital Marketing" class="service-image">
+                                            </div>
+                                            <p class="service-description">
+                                                Strategic digital marketing solutions to grow your engineering business and reach wider audiences.
+                                            </p>
+                                        </div>
+                                        <span class="learn-more-btn">
+                                            Learn More <i class="ri-arrow-right-line"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Navigation Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Partners -->
+    <section id="events" class="partners-section">
+        <div class="partners-background"></div>
+        <div class="partners-gradient-overlay"></div>
+        <div class="partners-content-wrapper">
+            <h2 class="section-title partners-title">Our <span class="highlight">Partners</span></h2>
+            <div class="partners__container container">
+                <!-- Row 1 -->
+                <div class="partners__content">
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/294592432_464254855704471_5515655680738147879_n.jpg" alt="Partner 1" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/aarambha.jpg" alt="Partner 2" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/blurbird.png" alt="Partner 3" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/bridge water.jpg" alt="Partner 4" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/creative.jpg" alt="Partner 5" class="partners__img">
+                        </div>
+                    </article>
+                </div>
+                <!-- Row 2 (reverse) -->
+                <div class="partners__content partners__reverse">
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/Greenvillage.jpg" alt="Partner 6" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/Modern.jpg" alt="Partner 7" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/mount view.png" alt="Partner 8" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/Rupys.jpg" alt="Partner 9" class="partners__img">
+                        </div>
+                    </article>
+                    <article class="partners__card">
+                        <div class="blob"></div>
+                        <div class="partners__logo">
+                            <img src="assets/images/partnerslogo/samyak.png" alt="Partner 10" class="partners__img">
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ <!-- Features / Why Choose Us -->
+<section class="features-section">
+    <div class="features-background"></div>
+    <div class="features-gradient-overlay"></div>
+    
+    <div class="features-content-wrapper">
+        <h2 class="section-title">Why <span class="highlight">Choose Us?</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="blob"></div>
+                <div class="feature-icon">🎯</div>
+                <h3>Hands-on Learning</h3>
+                <p>Practical activities that bring concepts to life</p>
+            </div>
+            <div class="feature-card">
+                <div class="blob"></div>
+                <div class="feature-icon">📚</div>
+                <h3>CDC Curriculum Alignment</h3>
+                <p>Fully aligned with national curriculum standards</p>
+            </div>
+            <div class="feature-card">
+                <div class="blob"></div>
+                <div class="feature-icon">🤝</div>
+                <h3>Supportive Partnership</h3>
+                <p>Continuous support for teachers and schools</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Orbit Engineering Expo Section -->
+<section id="testimonials" class="orbit-expo-section">
+    <!-- Background Slideshow -->
+    <div class="expo-background">
+        <div class="bg-slide active">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80" alt="Expo Background 1">
+        </div>
+        <div class="bg-slide">
+            <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1920&q=80" alt="Expo Background 2">
+        </div>
+        <div class="bg-slide">
+            <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1920&q=80" alt="Expo Background 3">
+        </div>
+        <div class="bg-slide">
+            <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1920&q=80" alt="Expo Background 4">
+        </div>
+        <div class="bg-slide">
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=80" alt="Expo Background 5">
+        </div>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="expo-gradient-overlay"></div>
+
+    <!-- Content -->
+    <div class="expo-content">
+        <h1 class="expo-heading">Orbit Engineering Expo</h1>
+        
+        <div class="expo-cards-container">
+            <!-- Expo 1.0 Card -->
+            <a href="assets/Extra HTMLs/expo1.0.html" class="expo-card">
+                <div class="card-background">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Expo 1.0">
+                </div>
+                <div class="pink-gradient"></div>
+                <div class="card-content">
+                    <h2 class="card-title">Expo 1.0</h2>
+                </div>
+            </a>
+
+            <!-- Expo 2.0 Card -->
+            <a href="assets/Extra HTMLs/expo2.0.html" class="expo-card">
+                <div class="card-background">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Expo 2.0">
+                </div>
+                <div class="pink-gradient"></div>
+                <div class="card-content">
+                    <h2 class="card-title">Expo 2.0</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section" id="contact">
+        <div class="footer-bg"></div>
+        <div class="footer-dim"></div>
+        
+        <div class="footer-content">
+            <!-- Partner CTA -->
+            <div class="partner-cta">
+                <h2>Ready to <span class="highlight">Partner</span> with Us?</h2>
+                <p>Join our network of institutions and organizations transforming engineering education</p>
+                <a href="assets/Extra HTMLs/PartnerWithUs.html" class="partner-btn">
+                    <i class="ri-hand-heart-line"></i> Become a Partner
+                </a>
+            </div>
+
+            <!-- Footer Grid -->
+            <div class="footer-grid">
+                <!-- About Column -->
+                <div class="footer-column">
+                    <h3>About Engineers Vlogs</h3>
+                    <p class="about-text">
+                        A community of passionate engineers dedicated to making learning practical and inspiring. We focus on hands-on technical learning, skill development, and real-world applications.
+                    </p>
+                    <p class="company-tagline">
+                        "Let's Bring Engineering out of the Textbooks"
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="assets/Extra HTMLs/about us.html">About Us</a></li>
+                        <li><a href="#programs">Services</a></li>
+                        <li><a href="#events">Our Partners</a></li>
+                        <li><a href="#testimonials">Orbit Engineering Expo</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="social-grid">
+                        <a href="https://www.facebook.com/share/1AKZDQPkjb/" class="social-item facebook">
+                            <i class="ri-facebook-fill"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/info.engineersvlogs/" class="social-item instagram">
+                            <i class="ri-instagram-fill"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://x.com/engineersvlogs" class="social-item twitter">
+                            <i class="ri-twitter-x-fill"></i>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://np.linkedin.com/company/engineersvlogs" class="social-item linkedin">
+                            <i class="ri-linkedin-fill"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://www.youtube.com/@EngineersVlogs" class="social-item youtube">
+                            <i class="ri-youtube-fill"></i>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-item">
+                        <i class="ri-mail-line"></i>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info.engineersvlogs@gmail.com">info.engineersvlogs@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="ri-map-pin-line"></i>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Bafal, Kathmandu, Nepal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Engineers Vlogs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Swiper JS for Services -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Swiper JS for Services -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

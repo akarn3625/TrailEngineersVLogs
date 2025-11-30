@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Engineering Expo - Exhibition Event</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0a0e1a;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 100%);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.8) 0%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.8) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #00d4ff;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+
+        /* Event Section Template */
+        .event-section {
+            position: relative;
+            min-height: 100vh;
+            padding: 5rem 5%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .event-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3);
+        }
+
+        .event-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .event-section:nth-child(odd) .event-overlay {
+            background: linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.95) 0%,
+                rgba(0, 0, 0, 0.7) 40%,
+                rgba(0, 0, 0, 0.3) 70%,
+                transparent 100%
+            );
+        }
+
+        .event-section:nth-child(even) .event-overlay {
+            background: linear-gradient(
+                to left,
+                rgba(0, 0, 0, 0.95) 0%,
+                rgba(0, 0, 0, 0.7) 40%,
+                rgba(0, 0, 0, 0.3) 70%,
+                transparent 100%
+            );
+        }
+
+        .event-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .event-section:nth-child(even) .event-content {
+            direction: rtl;
+        }
+
+        .event-section:nth-child(even) .event-text,
+        .event-section:nth-child(even) .event-images {
+            direction: ltr;
+        }
+
+        .event-text {
+            padding: 2rem;
+        }
+
+        .event-number {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .event-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+            line-height: 1.2;
+        }
+
+        .event-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .event-highlights {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .event-highlights li {
+            padding: 0.8rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .event-highlights li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .event-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .event-image-card {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .event-image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+
+        .event-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .event-image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .event-image-card:first-child {
+            grid-column: 1 / -1;
+            aspect-ratio: 16/9;
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+            font-size: 0.9rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .event-image-card:hover .image-caption {
+            transform: translateY(0);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            position: relative;
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #1a1f3a 0%, #0a0e1a 100%);
+            border-top: 2px solid rgba(0, 212, 255, 0.3);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .event-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .event-section:nth-child(even) .event-content {
+                direction: ltr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .event-section {
+                padding: 3rem 5%;
+            }
+
+            .event-title {
+                font-size: 2rem;
+            }
+
+            .event-description {
+                font-size: 1rem;
+            }
+
+            .event-images {
+                grid-template-columns: 1fr;
+            }
+
+            .event-image-card:first-child {
+                grid-column: 1;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .event-section {
+                padding: 2rem 5%;
+            }
+
+            .event-text {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="hero-bg-slide active" style="background-image: url('../../drive-download-20251107T050826Z-1-001/270839868_458511522548017_1226032061056103428_n.jpg');"></div>
+            <div class="hero-bg-slide" style="background-image: url('../../drive-download-20251107T050826Z-1-001/image\ \(3\).png');"></div>
+            <div class="hero-bg-slide" style="background-image: url('../../drive-download-20251107T050826Z-1-001/270762803_458512192547950_2619317193659436964_n.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Orbit Engineering Expo 2024</h1>
+            <p class="hero-subtitle">Inspiring Innovation, Building Tomorrow</p>
+            <p class="hero-description">
+                A grand celebration of engineering excellence featuring cutting-edge innovations, 
+                interactive workshops, and inspiring demonstrations that brought together students, 
+                educators, and industry leaders.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <i class="ri-arrow-down-line"></i>
+        </div>
+    </section>
+
+    <!-- Event 1: Innovation Showcase -->
+    <section class="event-section">
+        <div class="event-background" style="background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&q=80');"></div>
+        <div class="event-overlay"></div>
+        <div class="event-content">
+            <div class="event-text">
+                <div class="event-number">Event 01</div>
+                <h2 class="event-title">Robo Soccer</h2>
+                <p class="event-description">
+                    The Innovation Showcase featured groundbreaking projects from students across Nepal, 
+                    demonstrating creative solutions to real-world problems. From robotics to sustainable 
+                    energy solutions, participants presented their innovative ideas to industry experts and peers.
+                </p>
+                <ul class="event-highlights">
+                    <li>50+ Student Projects Exhibited</li>
+                    <li>Live Robotics Demonstrations</li>
+                    <li>Interactive Technology Displays</li>
+                    <li>Industry Expert Evaluations</li>
+                    <li>Best Innovation Awards</li>
+                </ul>
+            </div>
+            <div class="event-images">
+                <div class="event-image-card">
+                    <img src="../../Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/image.png" alt="Innovation Showcase Main">
+                    <div class="image-caption">Students presenting their robotics projects</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="../../Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/IMG_7032.jpg" alt="Innovation Detail 1">
+                    <div class="image-caption">Interactive display stations</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="../../Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/IMG_7091.jpg" alt="Innovation Detail 2">
+                    <div class="image-caption">Award ceremony moments</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event 2: STEAM Workshops -->
+    <section class="event-section">
+        <div class="event-background" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80');"></div>
+        <div class="event-overlay"></div>
+        <div class="event-content">
+            <div class="event-text">
+                <div class="event-number">Event 02</div>
+                <h2 class="event-title">Robo War</h2>
+                <p class="event-description">
+                    Our intensive workshop series engaged participants in practical learning experiences 
+                    across Science, Technology, Engineering, Arts, and Mathematics. Expert facilitators 
+                    guided students through exciting hands-on activities designed to spark curiosity and 
+                    develop critical thinking skills.
+                </p>
+                <ul class="event-highlights">
+                    <li>15+ Interactive Workshop Sessions</li>
+                    <li>3D Printing & Design Thinking</li>
+                    <li>Arduino Programming Basics</li>
+                    <li>Sustainable Engineering Solutions</li>
+                    <li>Creative Problem Solving Activities</li>
+                </ul>
+            </div>
+            <div class="event-images">
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="STEAM Workshop Main">
+                    <div class="image-caption">Students engaged in hands-on activities</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80" alt="Workshop Detail 1">
+                    <div class="image-caption">3D printing demonstrations</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&q=80" alt="Workshop Detail 2">
+                    <div class="image-caption">Collaborative learning sessions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event 3: Tech Talks & Panel Discussions -->
+    <section class="event-section">
+        <div class="event-background" style="background-image: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1920&q=80');"></div>
+        <div class="event-overlay"></div>
+        <div class="event-content">
+            <div class="event-text">
+                <div class="event-number">Event 03</div>
+                <h2 class="event-title">Drone Race</h2>
+                <p class="event-description">
+                    Industry leaders and academic experts shared their insights on emerging technologies, 
+                    career opportunities, and the future of engineering. Panel discussions covered topics 
+                    from AI and machine learning to sustainable development and entrepreneurship in technology.
+                </p>
+                <ul class="event-highlights">
+                    <li>10+ Industry Expert Speakers</li>
+                    <li>Future of Engineering in Nepal</li>
+                    <li>Career Guidance Sessions</li>
+                    <li>Startup Success Stories</li>
+                    <li>Q&A with Industry Leaders</li>
+                </ul>
+            </div>
+            <div class="event-images">
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80" alt="Tech Talks Main">
+                    <div class="image-caption">Keynote speaker addressing audience</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80" alt="Panel Detail 1">
+                    <div class="image-caption">Panel discussion in progress</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80" alt="Panel Detail 2">
+                    <div class="image-caption">Audience engagement session</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event 4: Robotics Competition -->
+    <section class="event-section">
+        <div class="event-background" style="background-image: url('https://images.unsplash.com/photo-1563191597-b0eaa3d87aae?w=1920&q=80');"></div>
+        <div class="event-overlay"></div>
+        <div class="event-content">
+            <div class="event-text">
+                <div class="event-number">Event 04</div>
+                <h2 class="event-title">National Robotics Competition</h2>
+                <p class="event-description">
+                    The highlight of the expo was our National Robotics Competition where teams from schools 
+                    across Nepal competed in thrilling challenges. Participants designed, built, and programmed 
+                    robots to complete complex tasks, demonstrating technical skill, creativity, and teamwork.
+                </p>
+                <ul class="event-highlights">
+                    <li>30+ Competing Teams</li>
+                    <li>Line Following Challenge</li>
+                    <li>Obstacle Navigation Course</li>
+                    <li>Autonomous Robot Tasks</li>
+                    <li>Championship Prizes & Recognition</li>
+                </ul>
+            </div>
+            <div class="event-images">
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1563191597-b0eaa3d87aae?w=800&q=80" alt="Robotics Competition Main">
+                    <div class="image-caption">Robots competing in the arena</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=800&q=80" alt="Competition Detail 1">
+                    <div class="image-caption">Teams working on their robots</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80" alt="Competition Detail 2">
+                    <div class="image-caption">Victory celebrations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event 5: Community Exhibition -->
+    <section class="event-section">
+        <div class="event-background" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80');"></div>
+        <div class="event-overlay"></div>
+        <div class="event-content">
+            <div class="event-text">
+                <div class="event-number">Event 05</div>
+                <h2 class="event-title">Community Exhibition & Outreach</h2>
+                <p class="event-description">
+                    The Community Exhibition opened our doors to families and young learners, showcasing 
+                    the exciting world of engineering through interactive displays and fun experiments. 
+                    This event aimed to inspire the next generation and make STEAM education accessible to all.
+                </p>
+                <ul class="event-highlights">
+                    <li>2000+ Community Visitors</li>
+                    <li>Science Magic Shows</li>
+                    <li>Interactive Engineering Games</li>
+                    <li>Virtual Reality Experiences</li>
+                    <li>STEM Career Guidance Booths</li>
+                </ul>
+            </div>
+            <div class="event-images">
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Community Exhibition Main">
+                    <div class="image-caption">Families exploring exhibits together</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Exhibition Detail 1">
+                    <div class="image-caption">Children engaged in activities</div>
+                </div>
+                <div class="event-image-card">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" alt="Exhibition Detail 2">
+                    <div class="image-caption">VR experience booth</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">2500+</div>
+                <div class="stat-label">Total Participants</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Projects Exhibited</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Partner Organizations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Days of Innovation</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Hero background slideshow
+        let currentHeroBg = 0;
+        const heroBgSlides = document.querySelectorAll('.hero-bg-slide');
+
+        function changeHeroBg() {
+            heroBgSlides[currentHeroBg].classList.remove('active');
+            currentHeroBg = (currentHeroBg + 1) % heroBgSlides.length;
+            heroBgSlides[currentHeroBg].classList.add('active');
+        }
+
+        setInterval(changeHeroBg, 5000);
+
+        // Smooth scroll for arrow
+        document.querySelector('.scroll-indicator').addEventListener('click', function() {
+            const firstSection = document.querySelector('.event-section');
+            firstSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all event sections
+        document.querySelectorAll('.event-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'opacity 1s ease, transform 1s ease';
+            observer.observe(section);
+        });
+
+        // Animate stats on scroll
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statCards = entry.target.querySelectorAll('.stat-card');
+                    statCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>

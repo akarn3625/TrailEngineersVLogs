@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Partners - Orbit Engineering Expo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .partners-hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 100%);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.6) 50%,
+                rgba(0, 0, 0, 0.85) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1000px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #ff4d6d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 5%;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 1.5rem;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Partner Categories */
+        .partners-section {
+            padding: 4rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .category-block {
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #ff4d6d);
+            border-radius: 2px;
+        }
+
+        .category-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1.5rem;
+        }
+
+        /* Partner Grid */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .partner-card {
+            position: relative;
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 77, 109, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .partner-card:hover::before {
+            opacity: 1;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(0, 212, 255, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
+        }
+
+        .blob {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.4) 0%, rgba(255, 77, 109, 0.2) 100%);
+            border-radius: 50%;
+            filter: blur(50px);
+            position: absolute;
+            z-index: 0;
+            bottom: -100px;
+            right: -100px;
+            transition: all 0.4s ease;
+        }
+
+        .partner-card:hover .blob {
+            bottom: -80px;
+            right: -80px;
+            filter: blur(40px);
+        }
+
+        .partner-logo-container {
+            position: relative;
+            z-index: 1;
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .partner-card:hover .partner-logo-container {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.4);
+        }
+
+        .partner-logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .partner-info {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+        }
+
+        .partner-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .partner-card:hover .partner-name {
+            color: #00d4ff;
+        }
+
+        .partner-type {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .partner-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+            line-height: 1.6;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .partner-card:hover .partner-description {
+            opacity: 1;
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 5%;
+            text-align: center;
+            background: rgba(26, 31, 58, 0.4);
+            border-top: 2px solid rgba(0, 212, 255, 0.2);
+            margin-top: 3rem;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-title .highlight {
+            color: #00d4ff;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: white;
+            text-decoration: none;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(255, 77, 109, 0.5);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 77, 109, 0.7);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .cta-description {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .partners-section {
+                padding: 3rem 5%;
+            }
+
+            .category-block {
+                margin-bottom: 3rem;
+            }
+
+            .partner-card {
+                padding: 2rem;
+                min-height: 250px;
+            }
+
+            .partner-logo-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="partners-hero">
+        <div class="hero-background">
+            <div class="hero-bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80');"></div>
+            <div class="hero-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=80');"></div>
+            <div class="hero-bg-slide" style="background-image: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1920&q=80');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Our Partners</h1>
+            <p class="hero-subtitle">Collaborating for Excellence in Engineering Education</p>
+            <p class="hero-description">
+                We are grateful to our incredible partners who share our vision of transforming 
+                engineering education in Nepal. Together, we're building a brighter future through 
+                innovation, collaboration, and hands-on learning experiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Partner Organizations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Educational Institutions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Industry Partners</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Media Partners</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section">
+        <!-- Title Sponsors -->
+        <div class="category-block">
+            <div class="category-header">
+                <h2 class="category-title">Title Sponsors</h2>
+                <p class="category-subtitle">Our flagship partners driving innovation and excellence</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=Partner+1" alt="Title Sponsor 1" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Tech Innovators Ltd.</h3>
+                        <p class="partner-type">Title Sponsor</p>
+                        <p class="partner-description">Leading technology solutions provider supporting STEAM education initiatives across Nepal.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/ff4d6d/ffffff?text=Partner+2" alt="Title Sponsor 2" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Future Engineers Group</h3>
+                        <p class="partner-type">Title Sponsor</p>
+                        <p class="partner-description">Empowering the next generation through innovative engineering programs and mentorship.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Partners -->
+        <div class="category-block">
+            <div class="category-header">
+                <h2 class="category-title">Educational Partners</h2>
+                <p class="category-subtitle">Schools and institutions championing hands-on learning</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=School+1" alt="School Partner 1" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Bridgewater School</h3>
+                        <p class="partner-type">Educational Partner</p>
+                        <p class="partner-description">Pioneering institution integrating practical engineering into curriculum.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/ff4d6d/ffffff?text=School+2" alt="School Partner 2" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Green Village Academy</h3>
+                        <p class="partner-type">Educational Partner</p>
+                        <p class="partner-description">Committed to developing future leaders through STEAM education.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=School+3" alt="School Partner 3" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Modern Academy</h3>
+                        <p class="partner-type">Educational Partner</p>
+                        <p class="partner-description">Excellence in education with a focus on innovation and creativity.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/ff4d6d/ffffff?text=School+4" alt="School Partner 4" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Mount View School</h3>
+                        <p class="partner-type">Educational Partner</p>
+                        <p class="partner-description">Inspiring young minds through project-based learning experiences.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=School+5" alt="School Partner 5" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Samyak School</h3>
+                        <p class="partner-type">Educational Partner</p>
+                        <p class="partner-description">Nurturing creativity and innovation in every student.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/ff4d6d/ffffff?text=School+6" alt="School Partner 6" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Creative Academy</h3>
+                        <p class="partner-type">Educational Partner</p>
+                        <p class="partner-description">Building tomorrow's innovators through hands-on education.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industry Partners -->
+        <div class="category-block">
+            <div class="category-header">
+                <h2 class="category-title">Industry Partners</h2>
+                <p class="category-subtitle">Organizations driving real-world engineering applications</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=Industry+1" alt="Industry Partner 1" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Robotics Nepal</h3>
+                        <p class="partner-type">Industry Partner</p>
+                        <p class="partner-description">Leading robotics solutions and training programs for students.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/ff4d6d/ffffff?text=Industry+2" alt="Industry Partner 2" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Aarambha Tech</h3>
+                        <p class="partner-type">Industry Partner</p>
+                        <p class="partner-description">Innovation hub connecting students with industry experts.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=Industry+3" alt="Industry Partner 3" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Engineering Solutions</h3>
+                        <p class="partner-type">Industry Partner</p>
+                        <p class="partner-description">Providing cutting-edge tools and resources for engineering education.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Partners -->
+        <div class="category-block">
+            <div class="category-header">
+                <h2 class="category-title">Media Partners</h2>
+                <p class="category-subtitle">Amplifying our message and impact</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=Media+1" alt="Media Partner 1" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Blurbird Media</h3>
+                        <p class="partner-type">Media Partner</p>
+                        <p class="partner-description">Creative media production showcasing engineering excellence.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/ff4d6d/ffffff?text=Media+2" alt="Media Partner 2" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Rupy's Photography</h3>
+                        <p class="partner-type">Media Partner</p>
+                        <p class="partner-description">Capturing moments that inspire the next generation.</p>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <div class="blob"></div>
+                    <div class="partner-logo-container">
+                        <img src="https://via.placeholder.com/150/00d4ff/ffffff?text=Media+3" alt="Media Partner 3" class="partner-logo">
+                    </div>
+                    <div class="partner-info">
+                        <h3 class="partner-name">Tech News Nepal</h3>
+                        <p class="partner-type">Media Partner</p>
+                        <p class="partner-description">Sharing stories of innovation and engineering breakthroughs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Become a <span class="highlight">Partner</span></h2>
+            <p class="cta-description">
+                Join our network of forward-thinking organizations committed to transforming 
+                engineering education in Nepal. Together, we can inspire and empower the next 
+                generation of innovators.
+            </p>
+            <a href="#contact" class="cta-button">
+                <i class="ri-hand-heart-line"></i> Partner With Us
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Hero background slideshow
+        let currentHeroBg = 0;
+        const heroBgSlides = document.querySelectorAll('.hero-bg-slide');
+
+        function changeHeroBg() {
+            if (heroBgSlides.length > 0) {
+                heroBgSlides[currentHeroBg].classList.remove('active');
+                currentHeroBg = (currentHeroBg + 1) % heroBgSlides.length;
+                heroBgSlides[currentHeroBg].classList.add('active');
+            }
+        }
+
+        if (heroBgSlides.length > 1) {
+            setInterval(changeHeroBg, 5000);
+        }
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.category-block').forEach((block, index) => {
+            block.style.opacity = '0';
+            block.style.transform = 'translateY(50px)';
+            block.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            block.style.animationDelay = `${index * 0.2}s`;
+            observer.observe(block);
+        });
+
+        // Animate stats
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statCards = entry.target.querySelectorAll('.stat-card');
+                    statCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>

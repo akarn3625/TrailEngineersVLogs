@@ -1,0 +1,32 @@
+{
+  "name": "Engineers Vlogs",
+  "short_name": "Engineers Vlogs",
+  "description": "A community of passionate engineers dedicated to making learning practical and inspiring",
+  "icons": [
+    {
+      "src": "assets/images/white bg (1).png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/white bg (1).png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#E1839C",
+  "background_color": "#0a0e1a",
+  "display": "standalone",
+  "start_url": "/"
+}
+
+
+
+
+
+
+
+
+

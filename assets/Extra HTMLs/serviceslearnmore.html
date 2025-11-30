@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Engineers Vlogs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeOut 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(0, 212, 255, 0.2);
+            border-top: 4px solid #00d4ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+        }
+
+        /* Service Selector */
+        .service-selector {
+            position: fixed;
+            top: 100px;
+            left: 5%;
+            width: 250px;
+            background: rgba(26, 31, 58, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            z-index: 100;
+        }
+
+        .service-selector h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .service-nav {
+            list-style: none;
+        }
+
+        .service-nav li {
+            margin-bottom: 0.8rem;
+        }
+
+        .service-nav button {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            color: white;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .service-nav button:hover,
+        .service-nav button.active {
+            background: rgba(0, 212, 255, 0.3);
+            border-color: #00d4ff;
+            transform: translateX(5px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            margin-top: 120px;
+            padding: 2rem 5% 4rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        .service-detail {
+            display: none;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .service-detail.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .service-hero {
+            position: relative;
+            height: 400px;
+            border-radius: 2rem;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .service-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+        }
+
+        .service-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        .service-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .service-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .service-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(26, 31, 58, 0.6);
+            border-radius: 2rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(255, 77, 109, 0.2) 100%);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: #00d4ff;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            color: #68D3E3;
+            margin: 2rem 0 1rem;
+            position: relative;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .content-section li {
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+            border-radius: 0.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .content-section li:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .feature-item {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 77, 109, 0.3);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 30px rgba(255, 77, 109, 0.5);
+            position: relative;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 77, 109, 0.7);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .service-selector {
+                left: 2%;
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .service-selector {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: calc(100vh - 80px);
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+
+            .service-selector.active {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 100px;
+                padding: 1.5rem 5%;
+            }
+
+            .service-hero {
+                height: 300px;
+            }
+
+            .service-hero-content {
+                padding: 2rem;
+            }
+
+            .service-title {
+                font-size: 2rem;
+            }
+
+            .service-subtitle {
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .back-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .service-hero {
+                height: 250px;
+            }
+
+            .service-title {
+                font-size: 1.5rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <i class="ri-code-s-slash-line"></i>
+            Engineers Vlogs
+        </a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <button class="back-btn" onclick="window.history.back()">
+            <i class="ri-arrow-left-line"></i>
+            Back to Home
+        </button>
+    </header>
+
+    <!-- Service Selector -->
+    <aside class="service-selector" id="serviceSelector">
+        <h3>Our Services</h3>
+        <ul class="service-nav">
+            <li><button onclick="showService('robotics')" class="active">Robotics Training</button></li>
+            <li><button onclick="showService('steam')">STEAM Training</button></li>
+            <li><button onclick="showService('media')">Engineering Media</button></li>
+            <li><button onclick="showService('software')">Software Training</button></li>
+            <li><button onclick="showService('civil')">Civil Engineering</button></li>
+            <li><button onclick="showService('marketing')">Digital Marketing</button></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Robotics Training -->
+        <div id="robotics" class="service-detail active">
+            <div class="service-hero">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&q=80" alt="Robotics Training" class="service-hero-bg">
+                <div class="service-hero-overlay"></div>
+                <div class="service-hero-content">
+                    <span class="service-tag">Training</span>
+                    <h1 class="service-title">Robotics Training</h1>
+                    <p class="service-subtitle">Master the fundamentals of robotics through hands-on projects and real-world applications that prepare you for the future of automation.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>About This Program</h2>
+                <p>Our Robotics Training program is designed to introduce students and professionals to the exciting world of robotics. Through a perfect blend of theoretical knowledge and practical application, participants gain comprehensive skills in robot design, programming, and deployment.</p>
+                
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>🤖 Fundamentals of robotics and automation systems</li>
+                    <li>⚙️ Mechanical design and assembly techniques</li>
+                    <li>💻 Robot programming using Arduino, Raspberry Pi, and other platforms</li>
+                    <li>🔌 Electronics and circuit design for robotics applications</li>
+                    <li>🎯 Sensor integration and control systems</li>
+                    <li>🚀 AI and machine learning in robotics</li>
+                </ul>
+
+                <h3>Program Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">👨‍🏫</div>
+                        <h4>Expert Instructors</h4>
+                        <p>Learn from experienced robotics engineers and educators</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛠️</div>
+                        <h4>Hands-On Projects</h4>
+                        <p>Build real robots from scratch</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏆</div>
+                        <h4>Competition Prep</h4>
+                        <p>Get ready for robotics competitions</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📜</div>
+                        <h4>Certification</h4>
+                        <p>Receive industry-recognized certificates</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Course Structure</h2>
+                <p>Our program is divided into progressive modules that build upon each other:</p>
+                <ul>
+                    <li><strong>Module 1:</strong> Introduction to Robotics - Understanding basic concepts and components</li>
+                    <li><strong>Module 2:</strong> Electronics Fundamentals - Learning circuits, sensors, and actuators</li>
+                    <li><strong>Module 3:</strong> Programming Basics - Introduction to coding for robots</li>
+                    <li><strong>Module 4:</strong> Mechanical Design - CAD modeling and 3D printing</li>
+                    <li><strong>Module 5:</strong> Advanced Topics - AI, computer vision, and autonomous navigation</li>
+                    <li><strong>Module 6:</strong> Final Project - Design and build your own robot</li>
+                </ul>
+            </div>
+
+            <div class="cta-section">
+                <h2>Ready to Start Your Robotics Journey?</h2>
+                <p>Join hundreds of students who have transformed their passion into skills</p>
+                <a href="#contact" class="cta-btn">Enroll Now</a>
+            </div>
+        </div>
+
+        <!-- STEAM Training -->
+        <div id="steam" class="service-detail">
+            <div class="service-hero">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80" alt="STEAM Training" class="service-hero-bg">
+                <div class="service-hero-overlay"></div>
+                <div class="service-hero-content">
+                    <span class="service-tag">Education</span>
+                    <h1 class="service-title">STEAM Training</h1>
+                    <p class="service-subtitle">Comprehensive STEAM education programs integrating science, technology, engineering, arts, and mathematics for holistic learning.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>About STEAM Education</h2>
+                <p>STEAM education represents an integrated approach to learning that combines Science, Technology, Engineering, Arts, and Mathematics. Our program is designed to develop critical thinking, creativity, and problem-solving skills through interdisciplinary projects and activities.</p>
+                
+                <h3>Program Components</h3>
+                <ul>
+                    <li>🔬 Science - Hands-on experiments and scientific inquiry</li>
+                    <li>💻 Technology - Digital literacy and modern tech tools</li>
+                    <li>⚙️ Engineering - Design thinking and engineering principles</li>
+                    <li>🎨 Arts - Creative expression and innovation</li>
+                    <li>📊 Mathematics - Problem-solving and logical thinking</li>
+                </ul>
+
+                <h3>Key Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h4>Project-Based Learning</h4>
+                        <p>Real-world applications and scenarios</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">👥</div>
+                        <h4>Collaborative Work</h4>
+                        <p>Teamwork and communication skills</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🧩</div>
+                        <h4>Interdisciplinary</h4>
+                        <p>Connecting multiple subjects</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌟</div>
+                        <h4>Innovation Focus</h4>
+                        <p>Encouraging creative solutions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Age-Appropriate Programs</h2>
+                <p>We offer STEAM programs tailored to different age groups:</p>
+                <ul>
+                    <li><strong>Primary Level (6-10 years):</strong> Introduction to STEAM concepts through play and exploration</li>
+                    <li><strong>Middle School (11-14 years):</strong> Deeper dive into each discipline with hands-on projects</li>
+                    <li><strong>High School (15-18 years):</strong> Advanced topics and competition preparation</li>
+                    <li><strong>College Level:</strong> Specialized workshops and career-oriented training</li>
+                </ul>
+            </div>
+
+            <div class="cta-section">
+                <h2>Empower the Next Generation</h2>
+                <p>Give your students the skills they need for tomorrow</p>
+                <a href="#contact" class="cta-btn">Get Started</a>
+            </div>
+        </div>
+
+        <!-- Engineering Media -->
+        <div id="media" class="service-detail">
+            <div class="service-hero">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&q=80" alt="Engineering Media" class="service-hero-bg">
+                <div class="service-hero-overlay"></div>
+                <div class="service-hero-content">
+                    <span class="service-tag">Media</span>
+                    <h1 class="service-title">Engineering Media</h1>
+                    <p class="service-subtitle">Professional media production and content creation services for engineering projects and educational materials.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Our Media Services</h2>
+                <p>Engineers Vlogs specializes in creating high-quality media content that brings engineering concepts to life. We combine technical expertise with creative storytelling to produce engaging educational and promotional materials.</p>
+                
+                <h3>Services We Offer</h3>
+                <ul>
+                    <li>🎥 Video production for engineering projects and tutorials</li>
+                    <li>📸 Professional photography for technical documentation</li>
+                    <li>✏️ Content writing for technical blogs and articles</li>
+                    <li>🎬 Animation and motion graphics for concepts</li>
+                    <li>📱 Social media content creation and management</li>
+                    <li>🎙️ Podcast production for engineering discussions</li>
+                </ul>
+
+                <h3>Our Approach</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
+                        <h4>Creative Excellence</h4>
+                        <p>Visually stunning content</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔧</div>
+                        <h4>Technical Accuracy</h4>
+                        <p>Engineering-focused approach</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <h4>Data-Driven</h4>
+                        <p>Analytics and optimization</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Fast Delivery</h4>
+                        <p>Meeting tight deadlines</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Portfolio Highlights</h2>
+                <p>We've worked with numerous educational institutions, startups, and established companies to create impactful content:</p>
+                <ul>
+                    <li><strong>Educational Videos:</strong> Over 500 tutorial videos reaching 2.5M+ viewers monthly</li>
+                    <li><strong>Project Documentation:</strong> Comprehensive media coverage for 200+ engineering projects</li>
+                    <li><strong>Event Coverage:</strong> Professional documentation of Orbit Engineering Expo and other major events</li>
+                    <li><strong>Brand Content:</strong> Social media management for engineering firms and educational institutions</li>
+                </ul>
+            </div>
+
+            <div class="cta-section">
+                <h2>Let's Tell Your Story</h2>
+                <p>Transform your engineering projects into compelling content</p>
+                <a href="#contact" class="cta-btn">Contact Us</a>
+            </div>
+        </div>
+
+        <!-- Software Training -->
+        <div id="software" class="service-detail">
+            <div class="service-hero">
+                <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=1920&q=80" alt="Software Training" class="service-hero-bg">
+                <div class="service-hero-overlay"></div>
+                <div class="service-hero-content">
+                    <span class="service-tag">Software</span>
+                    <h1 class="service-title">Software Training</h1>
+                    <p class="service-subtitle">Advanced software development training covering modern programming languages, frameworks, and industry best practices.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Comprehensive Software Education</h2>
+                <p>Our software training program is designed to transform beginners into proficient developers and help experienced programmers master new technologies. We focus on practical, industry-relevant skills that employers are looking for.</p>
+                
+                <h3>Technologies We Teach</h3>
+                <ul>
+                    <li>💻 Programming Languages: Python, Java, C++, JavaScript</li>
+                    <li>🌐 Web Development: HTML, CSS, React, Node.js</li>
+                    <li>📱 Mobile App Development: Flutter, React Native</li>
+                    <li>🗄️ Database Management: SQL, MongoDB</li>
+                    <li>☁️ Cloud Computing: AWS, Azure, Google Cloud</li>
+                    <li>🔒 Cybersecurity fundamentals</li>
+                </ul>
+
+                <h3>Learning Approach</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">💡</div>
+                        <h4>Practical Focus</h4>
+                        <p>Learn by building real projects</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">👨‍💻</div>
+                        <h4>Industry Mentors</h4>
+                        <p>Learn from working professionals</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <h4>Career Support</h4>
+                        <p>Job placement assistance</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📚</div>
+                        <h4>Lifetime Access</h4>
+                        <p>Course materials forever</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+            <h2>Course Tracks</h2>
+            <p>Choose from our specialized learning paths:</p>
+            <ul>
+                <li><strong>Full Stack Web Development:</strong> 6-month intensive program covering frontend and backend</li>
+                <li><strong>Mobile App Development:</strong> Build iOS and Android apps from scratch</li>
+                <li><strong>Data Science & AI:</strong> Machine learning, data analysis, and AI applications</li>
+                <li><strong>DevOps Engineering:</strong> CI/CD, containerization, and cloud deployment</li>
+                <li><strong>Game Development:</strong> Unity and Unreal Engine programming</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2>Launch Your Tech Career</h2>
+            <p>Join thousands of successful graduates working at top companies</p>
+            <a href="#contact" class="cta-btn">Start Learning</a>
+        </div>
+    </div>
+
+    <!-- Civil Engineering Training -->
+    <div id="civil" class="service-detail">
+        <div class="service-hero">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80" alt="Civil Engineering" class="service-hero-bg">
+            <div class="service-hero-overlay"></div>
+            <div class="service-hero-content">
+                <span class="service-tag">Civil</span>
+                <h1 class="service-title">Civil Engineering Training</h1>
+                <p class="service-subtitle">Comprehensive civil engineering courses covering structural design, construction management, and advanced software tools.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Building Tomorrow's Infrastructure</h2>
+            <p>Our Civil Engineering Training program provides comprehensive education in all aspects of civil engineering, from theoretical foundations to practical applications. We prepare students and professionals for successful careers in the construction and infrastructure industries.</p>
+            
+            <h3>Core Topics</h3>
+            <ul>
+                <li>🏗️ Structural Analysis and Design</li>
+                <li>🌉 Bridge and Highway Engineering</li>
+                <li>💧 Water Resources and Hydraulic Engineering</li>
+                <li>🏢 Building Construction and Management</li>
+                <li>🗺️ Surveying and Geomatics</li>
+                <li>🌱 Environmental and Sustainable Engineering</li>
+            </ul>
+
+            <h3>Software Training</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📐</div>
+                    <h4>AutoCAD</h4>
+                    <p>2D and 3D drafting mastery</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏛️</div>
+                    <h4>Revit</h4>
+                    <p>Building Information Modeling</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>STAAD Pro</h4>
+                    <p>Structural analysis software</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h4>ETABS</h4>
+                    <p>Building analysis and design</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Specialized Programs</h2>
+            <p>We offer targeted training for different career paths:</p>
+            <ul>
+                <li><strong>Structural Engineering:</strong> Advanced analysis, earthquake engineering, and design codes</li>
+                <li><strong>Construction Management:</strong> Project planning, cost estimation, and site management</li>
+                <li><strong>Transportation Engineering:</strong> Road design, traffic engineering, and urban planning</li>
+                <li><strong>Geotechnical Engineering:</strong> Soil mechanics, foundation design, and slope stability</li>
+                <li><strong>Water Resources:</strong> Irrigation systems, drainage design, and flood management</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2>Build Your Civil Engineering Career</h2>
+            <p>Master the skills needed for modern infrastructure development</p>
+            <a href="#contact" class="cta-btn">Join Now</a>
+        </div>
+    </div>
+
+    <!-- Digital Marketing -->
+    <div id="marketing" class="service-detail">
+        <div class="service-hero">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80" alt="Digital Marketing" class="service-hero-bg">
+            <div class="service-hero-overlay"></div>
+            <div class="service-hero-content">
+                <span class="service-tag">Marketing</span>
+                <h1 class="service-title">Digital Marketing</h1>
+                <p class="service-subtitle">Strategic digital marketing solutions to grow your engineering business and reach wider audiences effectively.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Engineering-Focused Marketing</h2>
+            <p>We understand that marketing technical products and services requires a unique approach. Our digital marketing services are specifically tailored for engineering firms, educational institutions, and tech companies looking to expand their reach and impact.</p>
+            
+            <h3>Our Services</h3>
+            <ul>
+                <li>📱 Social Media Marketing - Engaging content across all platforms</li>
+                <li>🔍 SEO & SEM - Increase visibility on search engines</li>
+                <li>📧 Email Marketing - Targeted campaigns that convert</li>
+                <li>📝 Content Marketing - Technical blogs and thought leadership</li>
+                <li>📊 Analytics & Reporting - Data-driven decision making</li>
+                <li>🎨 Brand Development - Creating strong brand identities</li>
+            </ul>
+
+            <h3>Why Choose Us</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Technical Expertise</h4>
+                    <p>We understand engineering</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📈</div>
+                    <h4>Proven Results</h4>
+                    <p>Track record of success</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🤝</div>
+                    <h4>Partnership Approach</h4>
+                    <p>Your success is our goal</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h4>ROI Focused</h4>
+                    <p>Measurable business impact</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Marketing Packages</h2>
+            <p>Flexible solutions for every budget:</p>
+            <ul>
+                <li><strong>Starter Package:</strong> Social media management and basic SEO for small businesses</li>
+                <li><strong>Growth Package:</strong> Comprehensive digital presence including content marketing and paid ads</li>
+                <li><strong>Enterprise Package:</strong> Full-service marketing with dedicated team and strategy</li>
+                <li><strong>Custom Solutions:</strong> Tailored packages for unique business needs</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Grow Your Business?</h2>
+            <p>Let's create a marketing strategy that delivers results</p>
+            <a href="#contact" class="cta-btn">Get a Free Consultation</a>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Mobile menu toggle
+    function toggleMenu() {
+        const selector = document.getElementById('serviceSelector');
+        selector.classList.toggle('active');
+    }
+
+    // Service switching
+    function showService(serviceId) {
+        // Hide all services
+        document.querySelectorAll('.service-detail').forEach(service => {
+            service.classList.remove('active');
+        });
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.service-nav button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show selected service
+        document.getElementById(serviceId).classList.add('active');
+        
+        // Add active class to clicked button
+        event.target.classList.add('active');
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Close mobile menu if open
+        if (window.innerWidth <= 768) {
+            document.getElementById('serviceSelector').classList.remove('active');
+        }
+    }
+
+    // Check URL parameters on load
+    window.addEventListener('load', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const service = urlParams.get('service');
+        
+        if (service) {
+            const serviceButton = document.querySelector(`button[onclick="showService('${service}')"]`);
+            if (serviceButton) {
+                serviceButton.click();
+            }
+        }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const selector = document.getElementById('serviceSelector');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (window.innerWidth <= 768 && 
+            !selector.contains(event.target) && 
+            !menuToggle.contains(event.target) &&
+            selector.classList.contains('active')) {
+            selector.classList.remove('active');
+        }
+    });
+</script>
+</body>
+</html>
+</parameter>

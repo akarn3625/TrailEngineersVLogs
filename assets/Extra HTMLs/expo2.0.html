@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Engineering Expo 2024 | Engineers Vlogs</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/white bg (1).svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e1a;
+            overflow-x: hidden;
+        }
+
+        /* Orbit Engineering Expo 2024 Section */
+        .orbit-expo-section {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            max-width: 100%;
+            min-height: 120vh;
+            overflow: visible;
+            background: #0a0e1a;
+            z-index: 10;
+        }
+
+        /* Background Slideshow */
+        .expo-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .bg-slide.active {
+            opacity: 1;
+        }
+
+        .bg-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Gradient Overlay */
+        .expo-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: 
+                linear-gradient(to bottom, 
+                    rgba(0, 0, 0, 0.95) 0%,
+                    rgba(0, 0, 0, 0.7) 15%,
+                    rgba(0, 0, 0, 0.3) 30%,
+                    transparent 50%
+                ),
+                linear-gradient(to top, 
+                    rgba(0, 0, 0, 0.95) 0%,
+                    rgba(0, 0, 0, 0.7) 15%,
+                    rgba(0, 0, 0, 0.3) 30%,
+                    transparent 50%
+                );
+            pointer-events: none;
+        }
+
+        /* Content */
+        .expo-content {
+            position: relative;
+            z-index: 2;
+            min-height: 120vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5rem 5%;
+            overflow: visible;
+        }
+
+        /* Header */
+        .expo-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .expo-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .expo-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #00d4ff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Grid */
+        .expo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            width: 100%;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        /* Containers */
+        .expo-container {
+            position: relative;
+            height: 280px;
+            border-radius: 3rem;
+            overflow: visible;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(225, 131, 156, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .expo-container:nth-child(1) { animation-delay: 0.2s; }
+        .expo-container:nth-child(2) { animation-delay: 0.4s; }
+        .expo-container:nth-child(3) { animation-delay: 0.6s; }
+
+        .container-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 3rem;
+            overflow: hidden;
+        }
+
+        .expo-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(225, 131, 156, 0.4);
+            border-color: rgba(225, 131, 156, 0.6);
+        }
+
+        .container-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .container-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .expo-container:hover .container-bg img {
+            transform: scale(1.1);
+        }
+
+        /* Pink Gradient */
+        .pink-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(225, 131, 156, 0.85) 0%,
+                rgba(225, 131, 156, 0.6) 40%,
+                rgba(225, 131, 156, 0.3) 70%,
+                transparent 100%
+            );
+            z-index: 1;
+        }
+
+        .container-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container-content h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+            text-align: center;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% - 1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            width: 85%;
+            background: rgba(26, 31, 58, 0.95);
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(225, 131, 156, 0.3);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.5s ease,
+                        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            z-index: -1;
+            pointer-events: none;
+            padding-top: 1.5rem;
+        }
+
+        .dropdown-menu.active {
+            max-height: 320px;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+            z-index: 1000;
+        }
+
+        .dropdown-item {
+            padding: 1.5rem 2rem;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(225, 131, 156, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(225, 131, 156, 0.3);
+            padding-left: 2.5rem;
+            color: #00d4ff;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 9999;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: #00d4ff;
+            color: #0a0e1a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .expo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .expo-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .expo-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .expo-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .expo-header h1 {
+                font-size: 2rem;
+            }
+
+            .expo-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .container-content h3 {
+                font-size: 2rem;
+            }
+
+            .expo-container {
+                height: 220px;
+            }
+
+            .expo-content {
+                padding: 3rem 3%;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .expo-content {
+                padding: 2rem 3%;
+            }
+
+            .expo-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .expo-header h2 {
+                font-size: 1rem;
+            }
+
+            .container-content h3 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Button -->
+    <a href="../../index.html#home" class="back-button">← Back to Home</a>
+
+    <!-- Orbit Engineering Expo 2024 Section -->
+    <section class="orbit-expo-section">
+        <!-- Background Slideshow -->
+        <div class="expo-background">
+            <div class="bg-slide active">
+                <img src="../../drive-download-20251107T050826Z-1-001/270839868_458511522548017_1226032061056103428_n.jpg" alt="Expo 2024 Background 1">
+            </div>
+            <div class="bg-slide">
+                <img src="../../drive-download-20251107T050826Z-1-001/image (2).png" alt="Expo 2024 Background 2">
+            </div>
+            <div class="bg-slide">
+                <img src="../../drive-download-20251107T050826Z-1-001/image (1).png" alt="Expo 2024 Background 3">
+            </div>
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div class="expo-gradient-overlay"></div>
+
+        <!-- Content -->
+        <div class="expo-content">
+            <div class="expo-header">
+                <h1>Orbit Engineering Expo 2024</h1>
+                <h2>Nepal's Largest Engineering Exhibition</h2>
+            </div>
+
+            <div class="expo-grid">
+                <!-- Events Container with Dropdown -->
+                <div class="expo-container" id="expoEventsContainer2024">
+                    <div class="container-inner">
+                        <div class="container-bg">
+                            <img src="../../Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/IMG_7632.jpg" alt="Events 2024">
+                        </div>
+                        <div class="pink-gradient"></div>
+                        <div class="container-content">
+                            <h3>Events</h3>
+                        </div>
+                    </div>
+                    <div class="dropdown-menu" id="expoEventsDropdown2024">
+                        <div class="dropdown-item" data-link="robo-soccer-2024.html">Robo Soccer</div>
+                        <div class="dropdown-item" data-link="robo-war-2024.html">Robo War</div>
+                        <div class="dropdown-item" data-link="drone-race-2024.html">Drone Race</div>
+                    </div>
+                </div>
+
+                <!-- Highlights Container -->
+                <div class="expo-container" id="expoHighlightsContainer2024" data-link="highlights-2024.html">
+                    <div class="container-inner">
+                        <div class="container-bg">
+                            <img src="../../Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/viber_image_2023-10-02_14-50-35-545.jpg" alt="Highlights 2024">
+                        </div>
+                        <div class="pink-gradient"></div>
+                        <div class="container-content">
+                            <h3>Highlights</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partners Container -->
+                <div class="expo-container" id="expoPartnersContainer2024" data-link="partners-2024.html">
+                    <div class="container-inner">
+                        <div class="container-bg">
+                            <img src="../../Orbit Engineering Expo-20251107T050504Z-1-001/Orbit Engineering Expo/IMG_7091.jpg" alt="Partners 2024">
+                        </div>
+                        <div class="pink-gradient"></div>
+                        <div class="container-content">
+                            <h3>Partners</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Background slideshow
+        let currentBgSlide2024 = 0;
+        const bgSlides2024 = document.querySelectorAll('.bg-slide');
+
+        function changeBgSlide2024() {
+            if (bgSlides2024.length > 0) {
+                bgSlides2024[currentBgSlide2024].classList.remove('active');
+                currentBgSlide2024 = (currentBgSlide2024 + 1) % bgSlides2024.length;
+                bgSlides2024[currentBgSlide2024].classList.add('active');
+            }
+        }
+
+        if (bgSlides2024.length > 1) {
+            setInterval(changeBgSlide2024, 6000);
+        }
+
+        // Events dropdown handler
+        const expoEventsContainer2024 = document.getElementById('expoEventsContainer2024');
+        const expoEventsDropdown2024 = document.getElementById('expoEventsDropdown2024');
+
+        if (expoEventsContainer2024 && expoEventsDropdown2024) {
+            let isExpoDropdownOpen2024 = false;
+
+            expoEventsContainer2024.addEventListener('click', function(e) {
+                if (e.target.classList.contains('dropdown-item')) return;
+                
+                e.stopPropagation();
+                isExpoDropdownOpen2024 = !isExpoDropdownOpen2024;
+                expoEventsDropdown2024.classList.toggle('active', isExpoDropdownOpen2024);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (expoEventsContainer2024 && !expoEventsContainer2024.contains(e.target)) {
+                    isExpoDropdownOpen2024 = false;
+                    expoEventsDropdown2024.classList.remove('active');
+                }
+            });
+        }
+
+        // Dropdown navigation
+        const expoDropdownItems = document.querySelectorAll('.dropdown-item');
+        expoDropdownItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const link = this.getAttribute('data-link');
+                if (link) window.location.href = link;
+            });
+        });
+
+        // Other containers click handlers
+        const expoHighlightsContainer2024 = document.getElementById('expoHighlightsContainer2024');
+        const expoPartnersContainer2024 = document.getElementById('expoPartnersContainer2024');
+
+        if (expoHighlightsContainer2024) {
+            expoHighlightsContainer2024.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                if (link) window.location.href = link;
+            });
+        }
+
+        if (expoPartnersContainer2024) {
+            expoPartnersContainer2024.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                if (link) window.location.href = link;
+            });
+        }
+    </script>
+
+</body>
+</html>
